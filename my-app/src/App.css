@@ -1,29 +1,30 @@
-.img{
+.img {
   width: 8rem;
   height: 12rem;
-  margin-bottom: 2rem; 
+  margin-bottom: 2rem;
 }
 
-.no-account{
+.no-account {
   color: rgba(255, 255, 255, 0.349);
   margin: 4px;
 }
 
-
-.menu{
+.menu {
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   height: 100vh;
   margin: 0;
   padding: 3rem;
 }
-.menu-top{
+
+.menu-top {
   height: 10%;
   text-align: center;
 }
-.menu-buttons{
+
+.menu-buttons {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -31,9 +32,7 @@
   margin-top: 2rem;
 }
 
-
-
-.log-in{
+.log-in {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -41,35 +40,31 @@
   height: 100vh;
   margin: 0;
   padding: 3rem;
-  
 }
 
-h4{
+h4 {
   display: inline;
   align-self: center;
   text-align: center;
 }
 
-.top{
+.top {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 20%;
   margin-bottom: 8rem;
-
 }
-.bottom{
+.bottom {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 20%;
-  
 }
 
-
-.helper{
+.helper {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
