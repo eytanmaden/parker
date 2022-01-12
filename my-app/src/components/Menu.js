@@ -1,11 +1,14 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { LocalParkingOutlined } from "@mui/icons-material";
 import CameraIcon from "@mui/icons-material/Camera";
 import { styled } from "@mui/material/styles";
 import ButtonUnstyled, {
   buttonUnstyledClasses,
 } from "@mui/base/ButtonUnstyled";
+
+import useGeoLocation from "../hooks/useGeoLocation";
+
 const myBlue = {
   500: "#1CC5DC",
   600: "#0F2C67",
@@ -29,12 +32,10 @@ const CustomButtonRootOne = styled("span")`
   text-align: center;
   padding: 12px 24px;
   border-radius: 15px;
-  color: #FFF;
+  color: #fff;
   transition: all 150ms ease;
   cursor: pointer;
   border: none;
-
-
 
   &.${buttonUnstyledClasses.active} {
     background-color: ${yellow[600]};
@@ -68,7 +69,6 @@ const CustomButtonRootTwo = styled("span")`
   cursor: pointer;
   border: none;
 
-
   &.${buttonUnstyledClasses.active} {
     background-color: ${myBlue[600]};
   }
@@ -92,39 +92,55 @@ function CustomButtonTwo(props) {
   return <ButtonUnstyled {...props} component={CustomButtonRootTwo} />;
 }
 
-
-
-
-
-
 export default function Menu(props) {
-    const navigate = useNavigate();
+  const location = useGeoLocation();
+  const navigate = useNavigate();
 
-    const navigateToParking = () => navigate('/park-options')
+  const navigateToParking = () => navigate("/park-options");
 
-    useEffect(() => {
-      if (!props.signedIn) navigate('/');
-      // return () => {
-      //   if (props.signedIn) navigate('/menu');
-      // }
-    }, [])
+  useEffect(() => {
+    if (!props.signedIn) navigate("/");
+    // return () => {
+    //   if (props.signedIn) navigate('/menu');
+    // }
+  }, []);
 
-    return (
-      <div className="menu full-height">
-        <p className="menu-top">
-          <b>Good morning user. <br/> What do you want to do?</b>
-        </p>
+  console.log(location);
 
-        <div className="menu-buttons">
-          <CustomButtonOne onClick={navigateToParking} elevation={3} variant="contained">
-            <LocalParkingOutlined sx={{width: "90%", height: "60%", backgroundColor: `${yellow[500]}`}} />
-            Looking for Parking
-          </CustomButtonOne>
-          <CustomButtonTwo elevation={3} variant="contained">
-              <CameraIcon sx={{width: "90%", height: "60%", backgroundColor: `${myBlue[500]}`}}/>
-            Report a Parking Spot
-          </CustomButtonTwo>
-          {/* <Button
+  return (
+    <div className="menu full-height">
+      <p className="menu-top">
+        <b>
+          Good morning user. <br /> What do you want to do?
+        </b>
+      </p>
+
+      <div className="menu-buttons">
+        <CustomButtonOne
+          onClick={navigateToParking}
+          elevation={3}
+          variant="contained"
+        >
+          <LocalParkingOutlined
+            sx={{
+              width: "90%",
+              height: "60%",
+              backgroundColor: `${yellow[500]}`,
+            }}
+          />
+          Looking for Parking
+        </CustomButtonOne>
+        <CustomButtonTwo elevation={3} variant="contained">
+          <CameraIcon
+            sx={{
+              width: "90%",
+              height: "60%",
+              backgroundColor: `${myBlue[500]}`,
+            }}
+          />
+          Report a Parking Spot
+        </CustomButtonTwo>
+        {/* <Button
             className="menu-button"
             variant="outlined"
             size="large"
@@ -141,7 +157,7 @@ export default function Menu(props) {
           >
             Looking for a Parking
           </Button> */}
-        </div>
       </div>
-    );
+    </div>
+  );
 }
