@@ -1,12 +1,11 @@
 import './App.css';
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
+import { useState } from 'react';
 import { createMuiTheme, ThemeProvider } from '@mui/material';
-import { typography } from '@mui/system';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Loggs from './components/Loggs';
 import Menu from './components/Menu';
 import Map from './components/Map';
-import SimpleMap from './components/Map';
+import PossibleParkingPage from './components/parking-options-component/PossibleParkingPage';
 
 
 const theme = createMuiTheme({
@@ -25,13 +24,19 @@ const theme = createMuiTheme({
 
 
 function App() {
+  const [signedIn, setSignedIn] = useState(false);
 
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
-        <Loggs />
-        <Menu />
-        <SimpleMap />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Loggs setSignedIn={setSignedIn} />} />
+            <Route path="/menu" element={<Menu signedIn={signedIn} />} />
+            <Route path="/map" element={<Map signedIn={signedIn} />} />
+            <Route path="/park-options" element={<PossibleParkingPage signedIn={signedIn} />} />
+          </Routes>
+        </BrowserRouter>
       </div>
     </ThemeProvider>
   );

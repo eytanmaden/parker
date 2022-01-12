@@ -1,0 +1,88 @@
+body {
+  margin: 0;
+  color: #fff;
+  text-align: center;
+}
+
+h1,
+h2 {
+  margin: 0;
+}
+
+.possible-park {
+  background-color: rgb(21, 40, 75);
+  width: 100vw;
+  min-height: 100vh;
+  height: 100%;
+}
+
+.possible-park header {
+  display: flex;
+}
+
+.possible-park header button {
+  margin: 0 25px;
+}
+
+.possible-park path {
+  color: #fff;
+}
+
+.possible-park-heading {
+  padding: 25px;
+}
+
+.possible-park-options-container {
+  height: 75vh;
+  overflow-y: scroll;
+}
+
+.possible-park-options-container::-webkit-scrollbar {
+  display: none;
+}
+
+.possible-park-option {
+  min-width: 500px;
+  width: 75%;
+  height: 100px;
+  margin: 50px auto;
+  background-color: rgb(182, 137, 255);
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+}
+
+.possible-park-option .content {
+  flex-basis: 75%;
+  text-align: left;
+  padding: 25px;
+}
+
+.possible-park-option p {
+  margin: 5px;
+}
+
+.possible-park-option .time {
+  font-size: 1.25rem;
+}
+
+.possible-park-option .btn {
+  text-align: right;
+  flex-basis: 25%;
+  padding: 25px;
+}
+
+.possible-park-option button {
+  background-color: rgb(251, 154, 153);
+  border: none;
+  color: #fff;
+  height: 80px;
+  width: 50px;
+  font-size: 1.25rem;
+  border-radius: 12.5px;
+  box-shadow: 1px 3px 2px rgba(0, 0, 0, 0.5);
+}
+
+.possible-park-option button:active {
+  box-shadow: inset 1px 3px 2px rgba(0, 0, 0, 0.5);
+}

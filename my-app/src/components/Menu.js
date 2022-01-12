@@ -1,12 +1,8 @@
-import React from 'react'
-import Paper from "@mui/material/Paper";
-import Box from "@mui/material/Box";
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { LocalParkingOutlined } from "@mui/icons-material";
 import CameraIcon from "@mui/icons-material/Camera";
-import CameraOutlinedIcon from "@mui/icons-material/CameraOutlined";
-import { purple } from "@mui/material/colors";
 import { styled } from "@mui/material/styles";
-import Button from "@mui/material/Button";
 import ButtonUnstyled, {
   buttonUnstyledClasses,
 } from "@mui/base/ButtonUnstyled";
@@ -101,15 +97,26 @@ function CustomButtonTwo(props) {
 
 
 
-export default function Menu() {
+export default function Menu(props) {
+    const navigate = useNavigate();
+
+    const navigateToParking = () => navigate('/park-options')
+
+    useEffect(() => {
+      if (!props.signedIn) navigate('/');
+      // return () => {
+      //   if (props.signedIn) navigate('/menu');
+      // }
+    }, [])
+
     return (
-      <div className="menu">
+      <div className="menu full-height">
         <p className="menu-top">
           <b>Good morning user. <br/> What do you want to do?</b>
         </p>
 
         <div className="menu-buttons">
-          <CustomButtonOne elevation={3} variant="contained">
+          <CustomButtonOne onClick={navigateToParking} elevation={3} variant="contained">
             <LocalParkingOutlined sx={{width: "90%", height: "60%", backgroundColor: `${yellow[500]}`}} />
             Looking for Parking
           </CustomButtonOne>
