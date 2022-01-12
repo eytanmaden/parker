@@ -9,33 +9,21 @@ import { getAvailableParking } from '../../lib/getParkingSpotApis';
 
 function PossibleParkingPage(props) {
     const navigate = useNavigate();
-    const [parkingOptions, setParkingOptions] = useState([
-        {
-            minutes: 30,
-            lat: '123.123123',
-            lon: '123.123123'
-        },
-        {
-            minutes: 50,
-            lat: '123.123123',
-            lon: '123.123123'
-        },
-        {
-            minutes: 100,
-            lat: '123.123123',
-            lon: '123.123123'
-        }
-    ])
+    const [parkingOptions, setParkingOptions] = useState([])
+    const [enableStateChange, setEnableStateChange] = useState(true);
 
     const backToMenu = () => navigate('/menu');
 
     useEffect(() => {
-        console.log('hey')
-        getAvailableParking().then(res => console.log(res))
+        getAvailableParking().then(res => {
+            if (typeof res === 'string') return;
+            else if (enableStateChange) setParkingOptions(res);
+        })
         if (!props.signedIn) navigate('/');
         // return () => {
         //     if (props.signedIn) navigate('/park-options');
         // }
+        return () => setEnableStateChange(false);;
     }, [])
 
     return (

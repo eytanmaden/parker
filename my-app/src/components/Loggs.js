@@ -59,7 +59,6 @@ export default function Loggs(props) {
   }
 
   const clickHandle = () => {
-    console.log('clicked')
     props.setSignedIn(true);
     navigate('/menu')
   }
