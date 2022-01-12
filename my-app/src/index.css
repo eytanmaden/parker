@@ -4,9 +4,12 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Poppins";
   background-color: #15254c;
   color: white;
   height: 100%;
   width: 100%;
+}
+
+* {
+  font-family: "Poppins";
 }

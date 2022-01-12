@@ -18,6 +18,8 @@ h2 {
 
 .possible-park header {
   display: flex;
+  justify-content: space-between;
+  padding-top: 10px;
 }
 
 .possible-park header button {
