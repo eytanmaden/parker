@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { LocalParkingOutlined } from "@mui/icons-material";
 import CameraIcon from "@mui/icons-material/Camera";
@@ -95,6 +96,14 @@ function CustomButtonTwo(props) {
 export default function Menu(props) {
   const location = useGeoLocation();
   const navigate = useNavigate();
+  const userId = 1;
+
+  const searchParking = async () => {
+    await axios
+      .put("/driver", userId)
+      .then((response) => console.log(response));
+    navigateToParking();
+  };
 
   const navigateToParking = () => navigate("/park-options");
 
@@ -104,8 +113,6 @@ export default function Menu(props) {
     //   if (props.signedIn) navigate('/menu');
     // }
   }, []);
-
-  console.log(location);
 
   return (
     <div className="menu full-height">
@@ -117,7 +124,8 @@ export default function Menu(props) {
 
       <div className="menu-buttons">
         <CustomButtonOne
-          onClick={navigateToParking}
+          // onClick={navigateToParking}
+          onClick={searchParking}
           elevation={3}
           variant="contained"
         >
