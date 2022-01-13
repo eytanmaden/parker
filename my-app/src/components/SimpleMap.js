@@ -113,7 +113,10 @@ const SimpleMap = (props) => {
         }
         // { headers: headerConfig }
       )
-      .then(() => navigate('/menu'))
+      .then(() => {
+        navigate('/menu')
+        alert("Parking spot submitted!");
+      })
       .catch((err) => {
         alert(err);
         return;
