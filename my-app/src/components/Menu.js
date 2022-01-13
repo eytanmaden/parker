@@ -95,17 +95,20 @@ function CustomButtonTwo(props) {
 
 export default function Menu(props) {
   const navigate = useNavigate();
+  const {currentLat, currentLon} = useGeoLocation().coordinates;
   const location = useGeoLocation();
   const userId = 1;
 
   const navigateToParking = () => navigate("/park-options");
 
   const searchParking = async () => {
-    const url = "http://localhost:8080/pedestrian/parking";
-
+    const url = "http://localhost:8080/driver/location";
+    console.log(location)
     await axios
-      .put(url, location, {
-        userId: userId,
+      .put(url, {
+        currentLat,
+        currentLon,
+        userId
       })
       .catch((error) => {
         console.log(error);
