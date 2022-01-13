@@ -37,6 +37,7 @@ const CustomButtonRootOne = styled("span")`
   transition: all 150ms ease;
   cursor: pointer;
   border: none;
+  margin-right: 25px;
 
   &.${buttonUnstyledClasses.active} {
     background-color: ${yellow[600]};

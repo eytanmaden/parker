@@ -44,7 +44,7 @@ h2 {
 }
 
 .possible-park-option {
-  min-width: 500px;
+  min-width: 300px;
   width: 75%;
   height: 100px;
   margin: 50px auto;
@@ -91,4 +91,10 @@ h2 {
 
 .possible-park-option button:active {
   box-shadow: inset 1px 3px 2px rgba(0, 0, 0, 0.5);
+}
+
+@media screen and (max-width: 500px) {
+  .average-time {
+    font-size: 0.75rem;
+  }
 }
