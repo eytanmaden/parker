@@ -23,6 +23,7 @@ function PossibleParkingPage(props) {
             }
             else if (enableStateChange) {
                 setParkingOptions(res);
+                console.log(res)
             }
         })
         if (!props.signedIn) navigate('/');
@@ -49,7 +50,7 @@ function PossibleParkingPage(props) {
             <div className="possible-park-options-container">
                 <div>
                     {parkingOptions.map((option, i) => {
-                        return <PossibleParkOption key={i} minutes={option.minutes} lat={option.lat} lon={option.lon} url={option.url} />
+                        return <PossibleParkOption key={i} minutes={option.duration} distance={option.distance} url={option.url} />
                     })}
                 </div>
             </div>
