@@ -102,7 +102,7 @@ const SimpleMap = (props) => {
     // const headerConfig = {
     //   "auth-token": `${token}`,
     // };
-    const url = "localhost:8080/pedestrian/newparking";
+    const url = "http://localhost:8080/pedestrian/newparking";
     axios
       .post(
         url,
@@ -113,6 +113,7 @@ const SimpleMap = (props) => {
         }
         // { headers: headerConfig }
       )
+      .then(() => navigate('/menu'))
       .catch((err) => {
         alert(err);
         return;
