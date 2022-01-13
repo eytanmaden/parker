@@ -2,14 +2,14 @@ import { useState, useEffect } from "react";
 
 const useGeoLocation = () => {
   const [location, setLocation] = useState({
-    coordinates: { userLat: "", userLon: "" },
+    coordinates: { currentLat: "", currentLon: "" },
   });
 
   const onSuccess = (location) => {
     setLocation({
       coordinates: {
-        userLat: location.coords.latitude,
-        userLon: location.coords.longitude,
+        currentLat: location.coords.latitude,
+        currentLon: location.coords.longitude,
       },
     });
   };
