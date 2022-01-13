@@ -105,7 +105,6 @@ export default function Menu(props) {
 
   const searchParking = async () => {
     const url = "http://localhost:8080/driver/location";
-    console.log(location)
     await axios
       .put(url, {
         currentLat,

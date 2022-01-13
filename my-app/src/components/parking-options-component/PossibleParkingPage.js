@@ -9,12 +9,25 @@ import { getAvailableParking } from "../../lib/getParkingSpotApis";
 import { parkingAverageTime } from '../../lib/parkingAverageTime';
 
 function PossibleParkingPage(props) {
-  const navigate = useNavigate();
-  const [parkingOptions, setParkingOptions] = useState([]);
-  const [enableStateChange, setEnableStateChange] = useState(true);
-  const [noParkingMessage, setNoParkingMessage] = useState("");
+    const navigate = useNavigate();
+    const [parkingOptions, setParkingOptions] = useState([]);
+    const [enableStateChange, setEnableStateChange] = useState(true);
+    const [noParkingMessage, setNoParkingMessage] = useState("");
 
-  const backToMenu = () => navigate("/menu");
+    const backToMenu = () => navigate("/menu");
+
+    const averageTimes = async (array) => new Promise((resolve, reject) => {
+    const results = []
+    let counter = 0;
+        array.forEach((item) => {
+            parkingAverageTime(item.lat, item.lon).then(res => {
+                item.averageParkTime = res;
+                results.push(item);
+                counter++
+                if (counter === array.length) resolve(results);
+            })
+        })
+    })
 
     useEffect(() => {
         getAvailableParking().then(res => {
@@ -23,13 +36,7 @@ function PossibleParkingPage(props) {
                 return;
             }
             else if (enableStateChange) {
-                setParkingOptions(res);
-                res.forEach((item, index) => {
-                    parkingAverageTime(item.lat, item.lon).then(res => setParkingOptions(prev => {
-                        prev[index].averageParkTime = res;
-                        return prev;
-                    }))
-                })
+                averageTimes(res).then(results => setParkingOptions(results))
             }
         })
         if (!props.signedIn) navigate('/');
@@ -38,6 +45,10 @@ function PossibleParkingPage(props) {
         // }
         return () => setEnableStateChange(false);;
     }, [])
+
+    useEffect(() => {
+        console.log(parkingOptions)
+    }, [parkingOptions])
 
     return (
         <div className="possible-park">
