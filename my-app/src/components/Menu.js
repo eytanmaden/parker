@@ -101,7 +101,7 @@ export default function Menu(props) {
   const navigateToParking = () => navigate("/park-options");
 
   const searchParking = async () => {
-    const url = "http://localhost:8000/parking";
+    const url = "http://localhost:8080/pedestrian/parking";
 
     await axios
       .put(url, location, {
