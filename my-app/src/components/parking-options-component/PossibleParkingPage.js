@@ -6,6 +6,7 @@ import { IconButton } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { getAvailableParking } from "../../lib/getParkingSpotApis";
+import { parkingAverageTime } from '../../lib/parkingAverageTime';
 
 function PossibleParkingPage(props) {
   const navigate = useNavigate();
@@ -23,7 +24,12 @@ function PossibleParkingPage(props) {
             }
             else if (enableStateChange) {
                 setParkingOptions(res);
-                console.log(res)
+                res.forEach((item, index) => {
+                    parkingAverageTime(item.lat, item.lon).then(res => setParkingOptions(prev => {
+                        prev[index].averageParkTime = res;
+                        return prev;
+                    }))
+                })
             }
         })
         if (!props.signedIn) navigate('/');
@@ -50,7 +56,13 @@ function PossibleParkingPage(props) {
             <div className="possible-park-options-container">
                 <div>
                     {parkingOptions.map((option, i) => {
-                        return <PossibleParkOption key={i} minutes={option.duration} distance={option.distance} url={option.url} />
+                        return <PossibleParkOption
+                            key={i}
+                            minutes={option.duration}
+                            distance={option.distance}
+                            url={option.url}
+                            averageParkTime={option.averageParkTime}
+                        />
                     })}
                 </div>
             </div>
