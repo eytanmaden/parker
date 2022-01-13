@@ -1,13 +1,13 @@
 function PossibleParkOption(props) {
-    const { minutes, lat, lon } = props;
+    const { minutes, distance, url } = props;
     return (
         <div className="possible-park-option">
             <div className="content">
-                <p className="time">{minutes} min away</p>
-                <p className="coordinates">Lat: {lat}, Lon: {lon}</p>
+                <p className="time">{minutes}</p>
+                <p className="coordinates">{distance}</p>
             </div>
             <div className="btn">
-                <a href={props.url} target="_blank"><button className="possible-park-go">Go</button></a>
+                <a href={url} target="_blank"><button className="possible-park-go">Go</button></a>
             </div>
         </div>
     )

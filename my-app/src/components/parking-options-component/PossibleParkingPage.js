@@ -15,68 +15,46 @@ function PossibleParkingPage(props) {
 
   const backToMenu = () => navigate("/menu");
 
-  useEffect(() => {
-    getAvailableParking().then((res) => {
-      if (typeof res === "string") {
-        setNoParkingMessage(res);
-        return;
-      } else if (enableStateChange) {
-        setParkingOptions(res);
-      }
-    });
-    if (!props.signedIn) navigate("/");
-    // return () => {
-    //     if (props.signedIn) navigate('/park-options');
-    // }
-    return () => setEnableStateChange(false);
-  }, []);
+    useEffect(() => {
+        getAvailableParking().then(res => {
+            if (typeof res === 'string') {
+                setNoParkingMessage(res);
+                return;
+            }
+            else if (enableStateChange) {
+                setParkingOptions(res);
+                console.log(res)
+            }
+        })
+        if (!props.signedIn) navigate('/');
+        // return () => {
+        //     if (props.signedIn) navigate('/park-options');
+        // }
+        return () => setEnableStateChange(false);;
+    }, [])
 
-  useEffect(() => {
-    getAvailableParking().then((res) => {
-      if (typeof res === "string") {
-        setNoParkingMessage(res);
-        return;
-      } else if (enableStateChange) {
-        setParkingOptions(res);
-      }
-    });
-    if (!props.signedIn) navigate("/");
-    // return () => {
-    //     if (props.signedIn) navigate('/park-options');
-    // }
-    return () => setEnableStateChange(false);
-  }, []);
-
-  return (
-    <div className="possible-park">
-      <header>
-        <IconButton onClick={backToMenu}>
-          <ArrowBackIcon />
-        </IconButton>
-        <IconButton>
-          <MoreHorizIcon />
-        </IconButton>
-      </header>
-      <div className="possible-park-heading">
-        <h2>Possible Parking Near You</h2>
-      </div>
-      {noParkingMessage && <h1>{noParkingMessage}</h1>}
-      <div className="possible-park-options-container">
-        <div>
-          {parkingOptions.map((option, i) => {
-            return (
-              <PossibleParkOption
-                key={i}
-                minutes={option.minutes}
-                lat={option.lat}
-                lon={option.lon}
-                url={option.url}
-              />
-            );
-          })}
+    return (
+        <div className="possible-park">
+            <header>
+                <IconButton onClick={backToMenu}>
+                    <ArrowBackIcon/>
+                </IconButton>
+                <IconButton>
+                    <MoreHorizIcon />
+                </IconButton>
+            </header>
+            <div className="possible-park-heading">
+                <h2>Possible Parking Near You</h2>
+            </div>
+            {noParkingMessage && <h1>{noParkingMessage}</h1>}
+            <div className="possible-park-options-container">
+                <div>
+                    {parkingOptions.map((option, i) => {
+                        return <PossibleParkOption key={i} minutes={option.duration} distance={option.distance} url={option.url} />
+                    })}
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
   );
 }
 
