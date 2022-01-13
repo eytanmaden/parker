@@ -12,7 +12,7 @@ function PossibleParkOption(props) {
                 <p className="time">{minutes}</p>
                 <p className="coordinates">{distance}</p>
             </div>
-            <div>Average time to park approx. {averageParkTime} minutes</div>
+            <div>Average time to park approx. {averageParkTime !== "-1" ? averageParkTime : "Unknown"} minutes</div>
             <div className="btn">
                 <a href={url} target="_blank"><button className="possible-park-go">Go</button></a>
             </div>
