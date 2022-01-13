@@ -4,8 +4,8 @@ import { createMuiTheme, ThemeProvider } from '@mui/material';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Loggs from './components/Loggs';
 import Menu from './components/Menu';
-import MapContainer from './components/MapContainer';
 import PossibleParkingPage from './components/parking-options-component/PossibleParkingPage';
+import SimpleMap from './components/SimpleMap';
 
 
 const theme = createMuiTheme({
@@ -33,7 +33,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Loggs setSignedIn={setSignedIn} />} />
             <Route path="/menu" element={<Menu signedIn={signedIn} />} />
-            <Route path="/map" element={<MapContainer signedIn={signedIn} />} />
+            <Route path="/map" element={<SimpleMap signedIn={signedIn} />} />
             <Route path="/park-options" element={<PossibleParkingPage signedIn={signedIn} />} />
           </Routes>
         </BrowserRouter>

@@ -11,13 +11,19 @@ function PossibleParkingPage(props) {
     const navigate = useNavigate();
     const [parkingOptions, setParkingOptions] = useState([])
     const [enableStateChange, setEnableStateChange] = useState(true);
+    const [noParkingMessage, setNoParkingMessage] = useState('');
 
     const backToMenu = () => navigate('/menu');
 
     useEffect(() => {
         getAvailableParking().then(res => {
-            if (typeof res === 'string') return;
-            else if (enableStateChange) setParkingOptions(res);
+            if (typeof res === 'string') {
+                setNoParkingMessage(res);
+                return;
+            }
+            else if (enableStateChange) {
+                setParkingOptions(res);
+            }
         })
         if (!props.signedIn) navigate('/');
         // return () => {
@@ -39,10 +45,11 @@ function PossibleParkingPage(props) {
             <div className="possible-park-heading">
                 <h2>Possible Parking Near You</h2>
             </div>
+            {noParkingMessage && <h1>{noParkingMessage}</h1>}
             <div className="possible-park-options-container">
                 <div>
                     {parkingOptions.map((option, i) => {
-                        return <PossibleParkOption key={i} minutes={option.minutes} lat={option.lat} lon={option.lon} />
+                        return <PossibleParkOption key={i} minutes={option.minutes} lat={option.lat} lon={option.lon} url={option.url} />
                     })}
                 </div>
             </div>

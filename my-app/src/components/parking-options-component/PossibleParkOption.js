@@ -7,7 +7,7 @@ function PossibleParkOption(props) {
                 <p className="coordinates">Lat: {lat}, Lon: {lon}</p>
             </div>
             <div className="btn">
-                <button className="possible-park-go">Go</button>
+                <a href={props.url} target="_blank"><button className="possible-park-go">Go</button></a>
             </div>
         </div>
     )
