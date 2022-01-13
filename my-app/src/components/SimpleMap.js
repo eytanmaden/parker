@@ -6,6 +6,13 @@ import ButtonUnstyled, {
   buttonUnstyledClasses,
 } from "@mui/base/ButtonUnstyled";
 import { styled } from "@mui/system";
+import { IconButton } from "@mui/material";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import { useNavigate } from "react-router-dom";
+import useGeoLocation from "../hooks/useGeoLocation";
+
+
 
 const blue = {
   500: "#2FDD92",
@@ -56,31 +63,39 @@ function CustomButton(props) {
 
 
 const SimpleMap = (props) => {
-  const [center, setCenter] = useState({ lat: 11.0168, lng: 78.9558 });
+  const { currentLat, currentLon } = useGeoLocation().coordinates;
+  const navigate = useNavigate();
+  const center = { lat: currentLat, lng: currentLon };
+  // const [center, setCenter] = useState({ lat: 11, lng: 33 });
   const [zoom, setZoom] = useState(16);
   const [userId, setUserId] = useState(1);
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
 
-  function getCoordinates(position) {
-    setLatitude(position.coords.latitude);
-    setLongitude(position.coords.longitude);
-    setCenter({lat: latitude, lng: longitude})
-  }
+  const backToMenu = () => {
+    navigate("/menu");
+  };
 
-  function getLocation() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(getCoordinates);
-    } else {
-      alert("geolocation is not supported by this browser. ");
-    }
-  }
+  // function getCoordinates(position) {
+  //   setLatitude(position.coords.latitude);
+  //   setLongitude(position.coords.longitude);
+  //   setCenter({lat: latitude, lng: longitude})
+  // }
+
+  // function getLocation() {
+  //   if (navigator.geolocation) {
+  //     navigator.geolocation.getCurrentPosition(getCoordinates);
+  //   } else {
+  //     alert("geolocation is not supported by this browser. ");
+  //   }
+  // }
     
   useEffect(() => {
-    getLocation();
+    // getLocation();
       console.log(latitude)
+      // setCenter({ lat: currentLat, lng: currentLon });
     
-  }, [center])
+  }, [])
 
   function handleSubmit() {
     
@@ -93,8 +108,8 @@ const SimpleMap = (props) => {
         url,
         {
           userId: userId,
-          newParkingLat: latitude,
-          newParkingLon: longitude,
+          newParkingLat: currentLat,
+          newParkingLon: currentLon,
         }
         // { headers: headerConfig }
       )
@@ -107,13 +122,21 @@ const SimpleMap = (props) => {
 
   return (
     <div style={{ backgroundColor: "#15254C", height: "70vh", width: "100%" }}>
-      {latitude ? <GoogleMapReact
+      <header style={{ backgroundColor: "#15254c00", display: "flex", flexDirection: "row", justifyContent: "space-between", padding: "2px" }}>
+          <IconButton style={{ color:"white" }}onClick={backToMenu}>
+            <ArrowBackIcon />
+          </IconButton>
+          <IconButton style={{ color:"white" }}>
+            <MoreHorizIcon />
+          </IconButton>
+        </header>
+      {currentLat ? <GoogleMapReact
         bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_KEY }}
         center={center}
         defaultZoom={zoom}
         mapType="mutedStandard"
       >
-        {latitude ? <Marker lat={latitude} lng={longitude} name="My Marker" color="blue" /> : null}
+        {currentLat ? <Marker lat={currentLat} lng={currentLon} name="My Marker" color="blue" /> : null}
       </GoogleMapReact> : null}
       <div className="map-page" style={{ display: "flex", flexDirection:"column", justifyContent:"flex-end", alignItems: "center", height: "30vh", backgroundColor: "#15254C"}}>
         <CustomButton onClick={handleSubmit}className="log-in" >Submit</CustomButton>

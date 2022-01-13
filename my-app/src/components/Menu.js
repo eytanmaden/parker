@@ -95,11 +95,13 @@ function CustomButtonTwo(props) {
 
 export default function Menu(props) {
   const navigate = useNavigate();
+  
   const {currentLat, currentLon} = useGeoLocation().coordinates;
   const location = useGeoLocation();
   const userId = 1;
 
   const navigateToParking = () => navigate("/park-options");
+  const navigateToMap = () => navigate("/map");
 
   const searchParking = async () => {
     const url = "http://localhost:8080/driver/location";
@@ -118,7 +120,7 @@ export default function Menu(props) {
   };
 
   useEffect(() => {
-    if (!props.signedIn) navigate("/");
+    // if (!props.signedIn) navigate("/");
     // return () => {
     //   if (props.signedIn) navigate('/menu');
     // }
@@ -148,7 +150,7 @@ export default function Menu(props) {
           />
           Looking for Parking
         </CustomButtonOne>
-        <CustomButtonTwo elevation={3} variant="contained">
+        <CustomButtonTwo onClick={navigateToMap} elevation={3} variant="contained">
           <CameraIcon
             sx={{
               width: "90%",
